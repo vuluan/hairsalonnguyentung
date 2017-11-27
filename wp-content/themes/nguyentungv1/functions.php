@@ -534,3 +534,13 @@ class NT_Homepage_Images_Widget extends WP_Widget {
 }
 
 add_action( 'widgets_init', create_function('', 'return register_widget("NT_Homepage_Images_Widget");') );
+
+
+//canonical - old domain to new domain
+add_filter('wpseo_canonical', 'swpseo_canonical_domain_replace');
+function swpseo_canonical_domain_replace($url){
+    $domain = 'hairsalonnguyentung.com';
+    $parsed = parse_url(home_url());
+    $current_site_domain = $parsed['host'];
+    return str_replace($current_site_domain, $domain, $url);
+}
